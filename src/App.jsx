@@ -10,11 +10,14 @@ function App() {
   const urlDefault = `https://api.openweathermap.org/data/2.5/weather?q=czestochowa&appid=8b9bb61d455dd40735396163cbd21dd7`
 
  
-  const submitHander = (e) => {
+   const submitHander = (e) => {
     e.preventDefault();
     axios.get(url).then((res) => {
       setData(res.data)
-    })
+    }).catch((error) => {
+      alert('Wrong Location!');
+      return error;
+  })
     setLocation('')
   }
 
@@ -56,7 +59,7 @@ function App() {
         <div className="bottom">
           <div className="feels">
           {data.main ? <p className='bold'>{data.main.feels_like.toFixed()}°F</p> : null}
-            <p>Fells Like</p>
+            <p>Feels Like</p>
           </div>
           <div className="humidity">
           {data.main ? <p className='bold'>{data.main.humidity}%</p> : null}
